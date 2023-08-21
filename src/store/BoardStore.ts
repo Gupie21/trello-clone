@@ -1,4 +1,4 @@
-import { databases, storage, ID } from '@/appwrite';
+import { ID, databases, storage } from '@/appwrite/config';
 import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumn';
 import uploadImage from '@/lib/uploadImage';
 import { create } from 'zustand'
@@ -109,8 +109,8 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     }
 
     await databases.deleteDocument(
-      process.env.NEXT_PUBLIC_DATABASE_ID,
-      process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID,
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
       todo.$id
     );
   },
@@ -121,8 +121,8 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
   updateTodoInDB: async (todo, columnId) => {
     await databases.updateDocument(
-      process.env.NEXT_PUBLIC_DATABASE_ID,
-      process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID,
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
       todo.$id,
       {
         title: todo.title,
